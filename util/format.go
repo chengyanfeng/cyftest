@@ -10,6 +10,7 @@ import (
 	"reflect"
 )
 
+//1.转换成int类型
 func ToInt(s interface{}, default_v ...int) int {
 	i, e := strconv.Atoi(ToString(s))
 	if e != nil && len(default_v) > 0 {
@@ -17,7 +18,7 @@ func ToInt(s interface{}, default_v ...int) int {
 	}
 	return i
 }
-
+//2.转换成int64
 func ToInt64(s interface{}, default_v ...int64) int64 {
 	switch s.(type) {
 	case int64:
@@ -33,7 +34,7 @@ func ToInt64(s interface{}, default_v ...int64) int64 {
 	}
 	return i64
 }
-
+//3.转换成float类型
 func ToFloat(s interface{}, default_v ...float64) float64 {
 	f64, e := strconv.ParseFloat(ToString(s), 64)
 	if e != nil && len(default_v) > 0 {
@@ -41,7 +42,7 @@ func ToFloat(s interface{}, default_v ...float64) float64 {
 	}
 	return f64
 }
-
+//4.转换成string类型
 func ToString(v interface{}, def ...string) string {
 	if v != nil {
 		switch v.(type) {
@@ -93,7 +94,7 @@ func ToString(v interface{}, def ...string) string {
 		return ""
 	}
 }
-
+//5.转换成p类型
 func ToP(v interface{}) P {
 	if v != nil {
 		switch v.(type) {
@@ -111,7 +112,7 @@ func ToP(v interface{}) P {
 	}
 	return P{}
 }
-
+//6.转换成string数组
 func ToStrings(v interface{}) []string {
 	strs := []string{}
 	if v != nil {
@@ -130,7 +131,7 @@ func ToStrings(v interface{}) []string {
 	}
 	return strs
 }
-
+//6.string 类型转换成string数组
 func ToFields(s string, div string) (r []string) {
 	s = Replace(s, []string{`""`}, "")
 	tmp := strings.Split(s, div)
@@ -165,7 +166,7 @@ func ToFields(s string, div string) (r []string) {
 	}
 	return
 }
-
+//8.转换成oid interface类型
 func ToOid(id interface{}) (oid bson.ObjectId) {
 	s := ToString(id)
 	if bson.IsObjectIdHex(s) {
@@ -194,7 +195,7 @@ func ToOids(ids interface{}) (oids []bson.ObjectId) {
 	}
 	return
 }
-
+//9.结构体转换成P类型，也就是map
 func StructToMap(obj interface{}) P {
 	t := reflect.TypeOf(obj)
 	v := reflect.ValueOf(obj)
