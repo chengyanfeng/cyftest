@@ -8,7 +8,7 @@ import (
 )
 
 type P map[string]interface{}
-
+//复制
 func (p *P) Copy() P {
 	pn := make(P)
 	for k, v := range *p {
