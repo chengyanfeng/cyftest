@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	fmt.print(“aaa”)
 	beego.Run()
 }
 
